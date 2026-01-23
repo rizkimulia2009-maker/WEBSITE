@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Pertamaku</title>
+  <meta name="description" content="Website personal sederhana dengan desain modern dan responsif." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card: #111a2e;
+      --muted: #93a4c7;
+      --text: #e6eefc;
+      --brand: #6ea8ff;
+      --brand-2: #7bffdf;
+      --ring: rgba(110,168,255,.4);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(110,168,255,.25), transparent 60%),
+        radial-gradient(1000px 500px at 90% 0%, rgba(123,255,223,.15), transparent 60%),
+        linear-gradient(180deg, #0b1220 0%, #0b1220 60%, #0a0f1a 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(180%) blur(12px);
+      background: rgba(11,18,32,.6);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav {
+      max-width: 1100px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; letter-spacing: .5px; display: inline-flex; align-items: center; gap: 10px; }
+    .brand-badge { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 6px 18px rgba(110,168,255,.45), inset 0 0 10px rgba(255,255,255,.25); }
+    .menu { display: flex; gap: 18px; }
+    .menu a { color: var(--muted); font-weight: 600; padding: 6px 10px; border-radius: 8px; transition: .2s; }
+    .menu a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+
+    .btn {
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #0b1220; font-weight: 800; letter-spacing: .3px;
+      border: 0; padding: 12px 18px; border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(110,168,255,.35), 0 2px 0 rgba(255,255,255,.2) inset;
+      cursor: pointer; transition: transform .08s ease;
+    }
+    .btn:active { transform: translateY(1px) scale(.99); }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; padding: 80px 0 60px; }
+    .hero h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.05; margin: 0 0 12px; letter-spacing: -.5px; }
+    .hero p { color: var(--muted); font-size: clamp(16px, 2.6vw, 18px); margin: 0 0 26px; }
+    .hero .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card-hero { position: relative; padding: 20px; }
+    .grid-dots { position: absolute; inset: -2px; border-radius: var(--radius); pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.09) 1px, transparent 1px); background-size: 18px 18px; mask-image: radial-gradient(300px 160px at 85% 20%, rgba(0,0,0,1), rgba(0,0,0,0.1)); }
+
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 12px; }
+    .stat { padding: 14px; border-radius: 12px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); text-align: center; }
+    .stat .v { font-size: 22px; font-weight: 800; }
+    .stat .k { color: var(--muted); font-size: 12px; }
+
+    /* Features */
+    .section { padding: 60px 0; }
+    .section h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 0 0 10px; }
+    .section p.lead { color: var(--muted); margin: 0 0 24px; }
+
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .feature { padding: 18px; position: relative; overflow: hidden; }
+    .feature .ic { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; margin-bottom: 10px; background: linear-gradient(135deg, rgba(110,168,255,.2), rgba(123,255,223,.2)); border: 1px solid rgba(255,255,255,.12); }
+    .feature h3 { margin: 4px 0 6px; font-size: 18px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 14px; }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .tile { border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 4/3; background: #0f1729; border: 1px solid rgba(255,255,255,.08); }
+    .tile img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.1) contrast(1.1); }
+
+    /* Contact */
+    form { display: grid; gap: 12px; max-width: 560px; }
+    label { font-weight: 600; font-size: 14px; color: var(--muted); }
+    input, textarea { width: 100%; padding: 12px 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: var(--text); border-radius: 10px; outline: 2px solid transparent; transition: .15s; }
+    input:focus, textarea:focus { outline-color: var(--ring); border-color: rgba(110,168,255,.5); box-shadow: 0 0 0 4px rgba(110,168,255,.08); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    footer { color: var(--muted); border-top: 1px solid rgba(255,255,255,.06); margin-top: 60px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 24px 20px; display: flex; align-items: center; justify-content: space-between; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 40px; }
+      .features { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .menu { display: none; }
+      .features { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#home">
+        <span class="brand-badge" aria-hidden="true"></span>
+        Website Pertamaku
+      </a>
+      <div class="menu" role="navigation" aria-label="Menu utama">
+        <a href="#fitur">Fitur</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#kontak">Kontak</a>
+      </div>
+      <button class="btn" onclick="document.getElementById('kontak').scrollIntoView({behavior:'smooth'})">Mulai</button>
+    </nav>
+  </header>
+
+  <main id="home" class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div>
+        <h1>Bangun Web Keren, Cepat dan Responsif</h1>
+        <p>Halaman ini dibuat ringan dan modern: tipografi rapi, efek glassmorphism halus, serta tata letak yang responsif untuk semua perangkat.</p>
+        <div class="cta">
+          <button class="btn" onclick="document.getElementById('fitur').scrollIntoView({behavior:'smooth'})">Lihat Fitur</button>
+          <a href="#galeri" style="color: var(--muted); font-weight: 700;">Lihat Galeri →</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="v">100%</div><div class="k">Responsif</div></div>
+          <div class="stat"><div class="v">Ringan</div><div class="k">Tanpa framework</div></div>
+          <div class="stat"><div class="v">Aesthetic</div><div class="k">Desain modern</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="card-hero glass">
+          <div class="grid-dots"></div>
+          <img alt="UI mockup" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" style="border-radius: 12px; border: 1px solid rgba(255,255,255,.12);"/>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+            <div class="glass" style="padding:12px; text-align:center;">⚡ Kinerja Optimal</div>
+            <div class="glass" style="padding:12px; text-align:center;">🎨 Tampilan Bersih</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="fitur" class="section">
+      <h2>Fitur Unggulan</h2>
+      <p class="lead">Elemen sederhana dengan sentuhan visual modern agar websitemu tampil menonjol.</p>
+      <div class="features">
+        <div class="feature glass">
+          <div class="ic">✨</div>
+          <h3>Desain Minimalis</h3>
+          <p>Fokus pada konten. Spasi rapi, warna lembut, dan kontras yang nyaman dilihat.</p>
+        </div>
+        <div class="feature glass">
+          <div class="ic">📱</div>
+          <h3>Responsif</h3>
+          <p>Layout otomatis menyesuaikan dari layar ponsel hingga desktop.</p>
+        </div>
+        <div class="feature glass">
+          <div class="ic">⚙️</div>
+          <h3>Mudah Disesuaikan</h3>
+          <p>Tanpa dependensi berat. Ubah teks, warna, dan gambar langsung dari file ini.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="galeri" class="section">
+      <h2>Galeri</h2>
+      <p class="lead">Kumpulan gambar placeholder untuk mengisi portofolio atau showcase.</p>
+      <div class="gallery">
+        <div class="tile"><img alt="work-1" src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop"></div>
+        <div class="tile"><img alt="work-2" src="https://images.unsplash.com/photo-1517433456452-f9633a875f6f?q=80&w=1200&auto=format&fit=crop"></div>
+        <div class="tile"><img alt="work-3" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"></div>
+        <div class="tile"><img alt="work-4" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1200&auto=format&fit=crop"></div>
+        <div class="tile"><img alt="work-5" src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop"></div>
+        <div class="tile"><img alt="work-6" src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="kontak" class="section">
+      <h2>Hubungi Saya</h2>
+      <p class="lead">Punya ide kolaborasi atau ingin konsultasi? Kirim pesan melalui formulir di bawah.</p>
+      <form onsubmit="handleSubmit(event)">
+        <div>
+          <label for="nama">Nama</label>
+          <input id="nama" name="nama" placeholder="Nama lengkap" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="namaku@email.com" required />
+        </div>
+        <div>
+          <label for="pesan">Pesan</label>
+          <textarea id="pesan" name="pesan" placeholder="Tulis pesanmu di sini..." required></textarea>
+        </div>
+        <button class="btn" type="submit">Kirim</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>© <span id="year"></span> Website Pertamaku</span>
+      <span style="color: var(--text);">•</span>
+      <a href="#home">Kembali ke atas ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // Tahun dinamis
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Handler form sederhana (tanpa backend)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      alert(`Terima kasih, ${data.nama}! Pesanmu sudah kami terima.`);
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
